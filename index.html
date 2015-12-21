@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  Framework docs
+  http://getskeleton.com/
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Mindfulness Coloring</title>
+  <meta name="description" content="Free Mindfulness Coloring Book Online">
+  <meta name="author" content="Matt Flynn">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="myStyle.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <script src="fabric.min.js"></script>
+<script>
+
+
+
+window.onload = function(canvas){
+	var canvas = document.getElementById("myCanvas");
+	canvas.width = document.getElementById("canvas_cont").offsetWidth;
+	canvas.height = canvas.width * 0.8;
+	var canvas = new fabric.Canvas('myCanvas');
+	canvas.isDrawingMode = true;
+	canvas.freeDrawingBrush.color = "#009945";
+	canvas.freeDrawingBrush.width = 15;
+	var imageURL = 'images/img1.png';
+	var n = 0;
+
+	drawOverlay();
+	
+
+	function drawOverlay(){
+	fabric.Image.fromURL(imageURL, function(oImg){
+		canvas.calcOffset();
+		var yScale = canvas.height/oImg.height;
+		var xScale = canvas.width/oImg.width;
+		oImg.scale(Math.max(yScale,xScale));
+		canvas.add(oImg);
+		canvas.renderAll();
+		console.log(oImg.width);
+	});
+	
+	canvas.on('mouse:up', function(options) {
+		n++;
+		console.log(n);
+		drawOverlay();
+		});	
+	};
+};
+
+function OnChange(imageSelection){
+	console.log(imageSelection);
+	imageURL = "images/"+imageSelection+".png";
+	drawOverlay();
+};
+
+</script>
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div class="container">
+	<div class="row" id="header">
+		<div class="twelve columns">
+			<h1>Mindfulness Coloring</h1>
+		</div>
+	</div>
+	<div class="row">
+	  <div class="two columns">
+		<h4>Palette</h4>
+		<select name="select1" onchange='OnChange(this.value);'>
+			<option value="img1">Image 1</option>
+			<option value="img2">Image 2</option>
+			<option value="img3">Image 3</option>
+			<option value="img4">Image 4</option>
+		</select>
+	  </div>
+	  <div class="eight columns" id="canvas_cont">
+		<canvas id="myCanvas"></canvas>
+
+	  </div>
+	  <div class="two columns" id="ads">
+	  <h4>Ads</h4>
+		
+	  </div>
+	</div>
+</div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
