@@ -13,7 +13,7 @@
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=">
 
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -34,6 +34,7 @@
 var imageURL = 'images/img1.png';
 var n = 0;
 var canvas;
+var currentImg;
 	
 window.onload = function(){
 	scaleCanvas();
@@ -41,9 +42,17 @@ window.onload = function(){
 
 	canvas.isDrawingMode = true;
 	canvas.freeDrawingBrush.color = "#009945";
-	canvas.freeDrawingBrush.width = 15;
-
-	drawOverlay();
+	canvas.freeDrawingBrush.width = 5;
+	
+	fabric.Image.fromURL(imageURL, function(oImg){
+			canvas.calcOffset();
+			var yScale = canvas.height/oImg.height;
+			var xScale = canvas.width/oImg.width;
+			oImg.scale(Math.max(yScale,xScale));
+			currentImg = oImg;
+			drawOverlay();
+		});
+	
 	
 	canvas.on('mouse:up', function(options) {
 		n++;
@@ -53,23 +62,26 @@ window.onload = function(){
 	
 };
 	function drawOverlay(){
-		var oImg;
-		canvas.remove(oImg);
-		fabric.Image.fromURL(imageURL, function(oImg){
-			canvas.calcOffset();
-			var yScale = canvas.height/oImg.height;
-			var xScale = canvas.width/oImg.width;
-			oImg.scale(Math.max(yScale,xScale));
-			canvas.add(oImg);
-			canvas.renderAll();
-			console.log(oImg.width);
-			});
+		canvas.remove(currentImg);
+		
+		canvas.add(currentImg);
+		canvas.renderAll();
+		//console.log(oImg.width);	
 	};
+	
+	
 function OnChange(imageSelection){
 	canvas.clear().renderAll();
 	console.log(imageSelection);
 	imageURL = "images/"+imageSelection+".png";
-	drawOverlay();
+	fabric.Image.fromURL(imageURL, function(oImg){
+			canvas.calcOffset();
+			var yScale = canvas.height/oImg.height;
+			var xScale = canvas.width/oImg.width;
+			oImg.scale(Math.max(yScale,xScale));
+			currentImg = oImg;
+			drawOverlay();
+		});
 };
 
 function scaleCanvas(){
@@ -94,13 +106,31 @@ function scaleCanvas(){
 	</div>
 	<div class="row">
 	  <div class="two columns">
-		<h4>Palette</h4>
-		<select name="select1" onchange='OnChange(this.value);'>
+		<h4>Image</h4>
+		<select name="select" onchange='OnChange(this.value);'>
 			<option value="img1">Image 1</option>
 			<option value="img2">Image 2</option>
 			<option value="img3">Image 3</option>
 			<option value="img4">Image 4</option>
 		</select>
+	<h4>Palette</h4>
+	<div class="colorbox" id="c"></div>
+	<div class="colorbox" id="c"></div>
+	<div class="colorbox" id="c"></div>
+	<div class="colorbox" id="c"></div>
+	<div class="colorbox" id="c"></div>
+	<div class="colorbox" id="c"></div>
+	<div class="colorbox" id="c"></div>
+	<div class="colorbox" id="c"></div>
+	<div class="colorbox" id="c"></div>
+	<div class="colorbox" id="c"></div>
+	<div class="colorbox" id="c"></div>
+	<div class="colorbox" id="c"></div>
+	<div class="colorbox" id="c"></div>
+	<div class="colorbox" id="c"></div>
+	<div class="colorbox" id="c"></div>
+	http://stackoverflow.com/questions/1057416/how-to-make-div-click-able
+		
 	  </div>
 	  <div class="eight columns" id="canvas_cont">
 		<canvas id="myCanvas"></canvas>
@@ -108,7 +138,8 @@ function scaleCanvas(){
 	  </div>
 	  <div class="two columns" id="ads">
 	  <h4>Ads</h4>
-		
+		<img src="images/book.jpg"></img>
+		Buy it on Amazon
 	  </div>
 	</div>
 </div>
