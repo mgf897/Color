@@ -31,46 +31,54 @@
   <script src="fabric.min.js"></script>
 <script>
 
+var imageURL = 'images/img1.png';
+var n = 0;
+var canvas;
+	
+window.onload = function(){
+	scaleCanvas();
+	canvas = new fabric.Canvas('myCanvas');
 
-
-window.onload = function(canvas){
-	var canvas = document.getElementById("myCanvas");
-	canvas.width = document.getElementById("canvas_cont").offsetWidth;
-	canvas.height = canvas.width * 0.8;
-	var canvas = new fabric.Canvas('myCanvas');
 	canvas.isDrawingMode = true;
 	canvas.freeDrawingBrush.color = "#009945";
 	canvas.freeDrawingBrush.width = 15;
-	var imageURL = 'images/img1.png';
-	var n = 0;
 
 	drawOverlay();
-	
-
-	function drawOverlay(){
-	fabric.Image.fromURL(imageURL, function(oImg){
-		canvas.calcOffset();
-		var yScale = canvas.height/oImg.height;
-		var xScale = canvas.width/oImg.width;
-		oImg.scale(Math.max(yScale,xScale));
-		canvas.add(oImg);
-		canvas.renderAll();
-		console.log(oImg.width);
-	});
 	
 	canvas.on('mouse:up', function(options) {
 		n++;
 		console.log(n);
 		drawOverlay();
-		});	
-	};
+	});
+	
 };
-
+	function drawOverlay(){
+		var oImg;
+		canvas.remove(oImg);
+		fabric.Image.fromURL(imageURL, function(oImg){
+			canvas.calcOffset();
+			var yScale = canvas.height/oImg.height;
+			var xScale = canvas.width/oImg.width;
+			oImg.scale(Math.max(yScale,xScale));
+			canvas.add(oImg);
+			canvas.renderAll();
+			console.log(oImg.width);
+			});
+	};
 function OnChange(imageSelection){
+	canvas.clear().renderAll();
 	console.log(imageSelection);
 	imageURL = "images/"+imageSelection+".png";
 	drawOverlay();
 };
+
+function scaleCanvas(){
+	var canvas = document.getElementById("myCanvas");
+	canvas.width = document.getElementById("canvas_cont").offsetWidth;
+	canvas.height = canvas.width * 0.8;
+};
+
+
 
 </script>
 </head>
