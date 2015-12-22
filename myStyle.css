@@ -15,7 +15,9 @@ select{
 	width:100%;
 	clear:right;
 }
-
+#social{
+	text-align:right;
+}
 .input_hidden {
     position: absolute;
     left: -9999px;

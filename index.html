@@ -53,13 +53,17 @@ window.onload = function(){
 	
 	canvas = new fabric.Canvas('myCanvas');
 	var paletteWidth = window.getComputedStyle(c01,null).getPropertyValue("width");
-	var colorBoxes = document.getElementsByClassName('colorbox');
-	
-	[].forEach.call(colorBoxes, function (colorBox) {
-		colorBox.height = paletteWidth;
-		console.log(colorBox.height + " "+ paletteWidth);
-	});
-	
+	var colorbox = document.getElementsByClassName('colorbox');
+
+	var getBgColor = function() {
+		brushColor = window.getComputedStyle(this,null).getPropertyValue("background-color");
+		console.log(brushColor);
+		updateBrushColor();	
+	};
+	for (var i = 0; i < colorbox.length; i++) {
+		colorbox[i].addEventListener('click', getBgColor, false);
+	}
+    	
 	
 	$('#brushSize input:radio').addClass('input_hidden');
 	$('#brushSize label').click(function(){
@@ -69,88 +73,7 @@ window.onload = function(){
 	canvas.isDrawingMode = true;
 	canvas.freeDrawingBrush.color = brushColor;
 	canvas.freeDrawingBrush.width = 10;
-
-	c01.onclick = function(){
-		brushColor = window.getComputedStyle(c01,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c02.onclick = function(){
-		brushColor = window.getComputedStyle(c02,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c03.onclick = function(){
-		brushColor = window.getComputedStyle(c03,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c04.onclick = function(){
-		brushColor = window.getComputedStyle(c04,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c05.onclick = function(){
-		brushColor = window.getComputedStyle(c05,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c06.onclick = function(){
-		brushColor = window.getComputedStyle(c06,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c07.onclick = function(){
-		brushColor = window.getComputedStyle(c07,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c08.onclick = function(){
-		brushColor = window.getComputedStyle(c08,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c09.onclick = function(){
-		brushColor = window.getComputedStyle(c09,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c10.onclick = function(){
-		brushColor = window.getComputedStyle(c10,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c11.onclick = function(){
-		brushColor = window.getComputedStyle(c11,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c12.onclick = function(){
-		brushColor = window.getComputedStyle(c12,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c13.onclick = function(){
-		brushColor = window.getComputedStyle(c13,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c14.onclick = function(){
-		brushColor = window.getComputedStyle(c14,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c15.onclick = function(){
-		brushColor = window.getComputedStyle(c15,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c16.onclick = function(){
-		brushColor = window.getComputedStyle(c16,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c17.onclick = function(){
-		brushColor = window.getComputedStyle(c17,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c18.onclick = function(){
-		brushColor = window.getComputedStyle(c18,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c19.onclick = function(){
-		brushColor = window.getComputedStyle(c19,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	c20.onclick = function(){
-		brushColor = window.getComputedStyle(c20,null).getPropertyValue("background-color");
-		updateBrushColor();	
-	};
-	
+		
 	fabric.Image.fromURL(imageURL, function(oImg){
 			canvas.calcOffset();
 			var yScale = canvas.height/oImg.height;
@@ -162,7 +85,7 @@ window.onload = function(){
 	
 	canvas.on('mouse:up', function(options) {
 		n++;
-		console.log(n);
+		//console.log(n);
 		drawOverlay();
 	});
 };
@@ -198,6 +121,9 @@ function updateBrushColor(){
 	console.log(brushColor);
 };
 
+
+
+
 </script>
 </head>
 <body>
@@ -206,18 +132,25 @@ function updateBrushColor(){
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div class="container">
 	<div class="row" id="header">
-		<div class="twelve columns">
+		<div class="ten columns">
 			<h1>Mindfulness Coloring</h1>
+		</div>
+		<div class="two columns" id="social">
+			<h6>Twitter | Facebook</h6>
 		</div>
 	</div>
 	<div class="row">
 		<div class="two columns">
 			<select name="select" onchange='OnChange(this.value);'>
-				<option value="img1">Image 1</option>
-				<option value="img2">Image 2</option>
-				<option value="img3">Image 3</option>
-				<option value="img4">Image 4</option>
+				<option value="img1">Pattern</option>
+				<option value="img2">Elephant</option>
+				<option value="img3">Swan</option>
+				<option value="img4">Horse</option>
+				<option value="img5">Zodiac</option>
+				<option value="img6">City</option>
+				<option value="img7">Pattern 2</option>
 			</select>
+			<form name="changeBrush">
 			<div id="brushSize">
 				<input type="radio" name="brushSize" id="smallBrush" />
 				<label for="smallBrush"><img class="brushImg" src="images/brushSmall.png" alt="small" /></label>
@@ -226,6 +159,7 @@ function updateBrushColor(){
 				<input type="radio" name="brushSize" id="largeBrush" />
 				<label for="largeBrush"><img class="brushImg" src="images/brushLarge.png" alt="large" /></label>
 			</div>
+			</form>
 			
 			
 			<div class="colorbox" id="c01"></div>
@@ -249,13 +183,14 @@ function updateBrushColor(){
 			<div class="colorbox" id="c19"></div>
 			<div class="colorbox" id="c20"></div>
 			
+			<p><p>
+			<button>Save</button>
 		</div>
 		<div class="eight columns" id="canvas_cont">
 		<canvas id="myCanvas"></canvas>
 
 		</div>
 		<div class="two columns" id="ads">
-			<h4>Ads</h4>
 			<img src="images/book.jpg" width="200px"></img>
 			Buy it on Amazon
 		</div>
