@@ -35,14 +35,113 @@ var imageURL = 'images/img1.png';
 var n = 0;
 var canvas;
 var currentImg;
+var brushColor = "#1abc9c";
+var c01;
+var c02;
+var c03;
+var c04;
 	
 window.onload = function(){
 	scaleCanvas();
-	canvas = new fabric.Canvas('myCanvas');
 
+	c01 = document.getElementById('c01');
+	c02 = document.getElementById('c02');
+	c03 = document.getElementById('c03');
+	c04 = document.getElementById('c04');
+	
+	canvas = new fabric.Canvas('myCanvas');
+	var paletteWidth = window.getComputedStyle(c01,null).getPropertyValue("width");
+	var colorBoxes = document.getElementsByClassName('colorbox');
+	
+	[].forEach.call(colorBoxes, function (colorBox) {
+		colorBox.height = paletteWidth;
+		console.log(colorBox.height + " "+ paletteWidth);
+	});
+	
 	canvas.isDrawingMode = true;
-	canvas.freeDrawingBrush.color = "#009945";
-	canvas.freeDrawingBrush.width = 5;
+	canvas.freeDrawingBrush.color = brushColor;
+	canvas.freeDrawingBrush.width = 10;
+
+	c01.onclick = function(){
+		brushColor = window.getComputedStyle(c01,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c02.onclick = function(){
+		brushColor = window.getComputedStyle(c02,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c03.onclick = function(){
+		brushColor = window.getComputedStyle(c03,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c04.onclick = function(){
+		brushColor = window.getComputedStyle(c04,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c05.onclick = function(){
+		brushColor = window.getComputedStyle(c05,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c06.onclick = function(){
+		brushColor = window.getComputedStyle(c06,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c07.onclick = function(){
+		brushColor = window.getComputedStyle(c07,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c08.onclick = function(){
+		brushColor = window.getComputedStyle(c08,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c09.onclick = function(){
+		brushColor = window.getComputedStyle(c09,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c10.onclick = function(){
+		brushColor = window.getComputedStyle(c10,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c11.onclick = function(){
+		brushColor = window.getComputedStyle(c11,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c12.onclick = function(){
+		brushColor = window.getComputedStyle(c12,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c13.onclick = function(){
+		brushColor = window.getComputedStyle(c13,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c14.onclick = function(){
+		brushColor = window.getComputedStyle(c14,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c15.onclick = function(){
+		brushColor = window.getComputedStyle(c15,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c16.onclick = function(){
+		brushColor = window.getComputedStyle(c16,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c17.onclick = function(){
+		brushColor = window.getComputedStyle(c17,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c18.onclick = function(){
+		brushColor = window.getComputedStyle(c18,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c19.onclick = function(){
+		brushColor = window.getComputedStyle(c19,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
+	c20.onclick = function(){
+		brushColor = window.getComputedStyle(c20,null).getPropertyValue("background-color");
+		updateBrushColor();	
+	};
 	
 	fabric.Image.fromURL(imageURL, function(oImg){
 			canvas.calcOffset();
@@ -53,22 +152,18 @@ window.onload = function(){
 			drawOverlay();
 		});
 	
-	
 	canvas.on('mouse:up', function(options) {
 		n++;
 		console.log(n);
 		drawOverlay();
 	});
-	
 };
-	function drawOverlay(){
-		canvas.remove(currentImg);
-		
-		canvas.add(currentImg);
-		canvas.renderAll();
-		//console.log(oImg.width);	
-	};
-	
+
+function drawOverlay(){
+	canvas.remove(currentImg);
+	canvas.add(currentImg);
+	canvas.renderAll();
+};
 	
 function OnChange(imageSelection){
 	canvas.clear().renderAll();
@@ -90,7 +185,10 @@ function scaleCanvas(){
 	canvas.height = canvas.width * 0.8;
 };
 
-
+function updateBrushColor(){
+	canvas.freeDrawingBrush.color = brushColor;
+	console.log(brushColor);
+};
 
 </script>
 </head>
@@ -105,42 +203,46 @@ function scaleCanvas(){
 		</div>
 	</div>
 	<div class="row">
-	  <div class="two columns">
-		<h4>Image</h4>
-		<select name="select" onchange='OnChange(this.value);'>
-			<option value="img1">Image 1</option>
-			<option value="img2">Image 2</option>
-			<option value="img3">Image 3</option>
-			<option value="img4">Image 4</option>
-		</select>
-	<h4>Palette</h4>
-	<div class="colorbox" id="c"></div>
-	<div class="colorbox" id="c"></div>
-	<div class="colorbox" id="c"></div>
-	<div class="colorbox" id="c"></div>
-	<div class="colorbox" id="c"></div>
-	<div class="colorbox" id="c"></div>
-	<div class="colorbox" id="c"></div>
-	<div class="colorbox" id="c"></div>
-	<div class="colorbox" id="c"></div>
-	<div class="colorbox" id="c"></div>
-	<div class="colorbox" id="c"></div>
-	<div class="colorbox" id="c"></div>
-	<div class="colorbox" id="c"></div>
-	<div class="colorbox" id="c"></div>
-	<div class="colorbox" id="c"></div>
-	http://stackoverflow.com/questions/1057416/how-to-make-div-click-able
-		
-	  </div>
-	  <div class="eight columns" id="canvas_cont">
+		<div class="two columns">
+			<h4>Image</h4>
+			<select name="select" onchange='OnChange(this.value);'>
+				<option value="img1">Image 1</option>
+				<option value="img2">Image 2</option>
+				<option value="img3">Image 3</option>
+				<option value="img4">Image 4</option>
+			</select>
+			<h4>Palette</h4>
+			<div class="colorbox" id="c01"></div>
+			<div class="colorbox" id="c02"></div>
+			<div class="colorbox" id="c03"></div>
+			<div class="colorbox" id="c04"></div>
+			<div class="colorbox" id="c05"></div>
+			<div class="colorbox" id="c06"></div>
+			<div class="colorbox" id="c07"></div>
+			<div class="colorbox" id="c08"></div>
+			<div class="colorbox" id="c09"></div>
+			<div class="colorbox" id="c10"></div>
+			<div class="colorbox" id="c11"></div>
+			<div class="colorbox" id="c12"></div>
+			<div class="colorbox" id="c13"></div>
+			<div class="colorbox" id="c14"></div>
+			<div class="colorbox" id="c15"></div>
+			<div class="colorbox" id="c16"></div>
+			<div class="colorbox" id="c17"></div>
+			<div class="colorbox" id="c18"></div>
+			<div class="colorbox" id="c19"></div>
+			<div class="colorbox" id="c20"></div>
+			
+		</div>
+		<div class="eight columns" id="canvas_cont">
 		<canvas id="myCanvas"></canvas>
 
-	  </div>
-	  <div class="two columns" id="ads">
-	  <h4>Ads</h4>
-		<img src="images/book.jpg"></img>
-		Buy it on Amazon
-	  </div>
+		</div>
+		<div class="two columns" id="ads">
+			<h4>Ads</h4>
+			<img src="images/book.jpg" width="200px"></img>
+			Buy it on Amazon
+		</div>
 	</div>
 </div>
 
