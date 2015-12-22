@@ -38,12 +38,18 @@ var n = 0;
 var canvas;
 var currentImg;
 var brushColor = "#1abc9c";
+var brushSize = 10;
 var c01;
 var c02;
 var c03;
 var c04;
 	
 window.onload = function(){
+
+	//select medium brush size
+	
+	//select first color
+
 	scaleCanvas();
 
 	c01 = document.getElementById('c01');
@@ -57,6 +63,10 @@ window.onload = function(){
 
 	var getBgColor = function() {
 		brushColor = window.getComputedStyle(this,null).getPropertyValue("background-color");
+		for (var i = 0; i < colorbox.length; i++) {
+			colorbox[i].style.border = "2px solid white";
+		}
+		this.style.border = "2px solid black";
 		console.log(brushColor);
 		updateBrushColor();	
 	};
@@ -72,7 +82,7 @@ window.onload = function(){
 	
 	canvas.isDrawingMode = true;
 	canvas.freeDrawingBrush.color = brushColor;
-	canvas.freeDrawingBrush.width = 10;
+	canvas.freeDrawingBrush.width = brushSize;
 		
 	fabric.Image.fromURL(imageURL, function(oImg){
 			canvas.calcOffset();
@@ -121,7 +131,17 @@ function updateBrushColor(){
 	console.log(brushColor);
 };
 
-
+function setBrushSize(size){
+	//console.log(size);
+	if (size=="large"){
+		brushSize = 20;
+	} else if (size=="medium"){
+		brushSize = 10;
+	}else {
+		brushSize = 5;
+	}
+	canvas.freeDrawingBrush.width = brushSize;
+};
 
 
 </script>
@@ -152,11 +172,11 @@ function updateBrushColor(){
 			</select>
 			<form name="changeBrush">
 			<div id="brushSize">
-				<input type="radio" name="brushSize" id="smallBrush" />
+				<input type="radio" name="brushSize" id="smallBrush" onclick="setBrushSize('small')"/>
 				<label for="smallBrush"><img class="brushImg" src="images/brushSmall.png" alt="small" /></label>
-				<input type="radio" name="brushSize" id="mediumBrush" />
+				<input type="radio" name="brushSize" id="mediumBrush" onclick="setBrushSize('medium')"/>
 				<label for="mediumBrush"><img class="brushImg" src="images/brushMedium.png" alt="medium" /></label>
-				<input type="radio" name="brushSize" id="largeBrush" />
+				<input type="radio" name="brushSize" id="largeBrush" onclick="setBrushSize('large')"/>
 				<label for="largeBrush"><img class="brushImg" src="images/brushLarge.png" alt="large" /></label>
 			</div>
 			</form>
@@ -183,8 +203,7 @@ function updateBrushColor(){
 			<div class="colorbox" id="c19"></div>
 			<div class="colorbox" id="c20"></div>
 			
-			<p><p>
-			<button>Save</button>
+	
 		</div>
 		<div class="eight columns" id="canvas_cont">
 		<canvas id="myCanvas"></canvas>
