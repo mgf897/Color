@@ -11,7 +11,34 @@ canvas{
 	margin:2px;
 	padding:0px;
 }
+select{
+	width:100%;
+	clear:right;
+}
+
+.input_hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+.selected {
+    background-color: #ccc;
+}
+
+#brushSize label {
+    display: inline-block;
+    cursor: pointer;
+	float:left;
+	width: 30%;
+}
+
+#brushSize label img {
+    padding: 3px;
+}
+
+
 #c01{ background-color:#1abc9c;
+	clear:left;
 }
 #c02{ background-color:#16a085;
 }

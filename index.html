@@ -29,6 +29,8 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
   <script src="fabric.min.js"></script>
+  <script src="jquery-2.1.4.min.js"></script>
+
 <script>
 
 var imageURL = 'images/img1.png';
@@ -56,6 +58,12 @@ window.onload = function(){
 	[].forEach.call(colorBoxes, function (colorBox) {
 		colorBox.height = paletteWidth;
 		console.log(colorBox.height + " "+ paletteWidth);
+	});
+	
+	
+	$('#brushSize input:radio').addClass('input_hidden');
+	$('#brushSize label').click(function(){
+		$(this).addClass('selected').siblings().removeClass('selected');
 	});
 	
 	canvas.isDrawingMode = true;
@@ -204,14 +212,22 @@ function updateBrushColor(){
 	</div>
 	<div class="row">
 		<div class="two columns">
-			<h4>Image</h4>
 			<select name="select" onchange='OnChange(this.value);'>
 				<option value="img1">Image 1</option>
 				<option value="img2">Image 2</option>
 				<option value="img3">Image 3</option>
 				<option value="img4">Image 4</option>
 			</select>
-			<h4>Palette</h4>
+			<div id="brushSize">
+				<input type="radio" name="brushSize" id="smallBrush" />
+				<label for="smallBrush"><img class="brushImg" src="images/brushSmall.png" alt="small" /></label>
+				<input type="radio" name="brushSize" id="mediumBrush" />
+				<label for="mediumBrush"><img class="brushImg" src="images/brushMedium.png" alt="medium" /></label>
+				<input type="radio" name="brushSize" id="largeBrush" />
+				<label for="largeBrush"><img class="brushImg" src="images/brushLarge.png" alt="large" /></label>
+			</div>
+			
+			
 			<div class="colorbox" id="c01"></div>
 			<div class="colorbox" id="c02"></div>
 			<div class="colorbox" id="c03"></div>
