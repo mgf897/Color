@@ -2,149 +2,35 @@
 <html lang="en">
 <head>
 
-  <!-- Basic Page Needs
-  Framework docs
-  http://getskeleton.com/
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Mindfulness Coloring</title>
-  <meta name="description" content="Free Mindfulness Coloring Book Online">
-  <meta name="author" content="Matt Flynn">
+	<!-- Basic Page Needs
+	Framework docs
+	http://getskeleton.com/
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<meta charset="utf-8">
+	<title>Mindfulness Coloring</title>
+	<meta name="description" content="Free Mindfulness Coloring Book Online">
+	<meta name="author" content="Matt Flynn">
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=">
+	<!-- Mobile Specific Metas
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<meta name="viewport" content="width=device-width, initial-scale=">
 
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="myStyle.css">
-
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
-  <script src="fabric.min.js"></script>
-  <script src="jquery-2.1.4.min.js"></script>
-
-<script>
-
-var imageURL = 'images/img1.png';
-var n = 0;
-var canvas;
-var currentImg;
-var brushColor = "#1abc9c";
-var brushSize = 10;
-var c01;
-var c02;
-var c03;
-var c04;
+	<!-- FONT
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 	
-window.onload = function(){
+	<!-- CSS
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/skeleton.css">
+	<link rel="stylesheet" href="myStyle.css">
 
-	//select medium brush size
-	
-	//select first color
-
-	scaleCanvas();
-
-	c01 = document.getElementById('c01');
-	c02 = document.getElementById('c02');
-	c03 = document.getElementById('c03');
-	c04 = document.getElementById('c04');
-	
-	canvas = new fabric.Canvas('myCanvas');
-	var paletteWidth = window.getComputedStyle(c01,null).getPropertyValue("width");
-	var colorbox = document.getElementsByClassName('colorbox');
-
-	var getBgColor = function() {
-		brushColor = window.getComputedStyle(this,null).getPropertyValue("background-color");
-		for (var i = 0; i < colorbox.length; i++) {
-			colorbox[i].style.border = "2px solid white";
-		}
-		this.style.border = "2px solid black";
-		console.log(brushColor);
-		updateBrushColor();	
-	};
-	for (var i = 0; i < colorbox.length; i++) {
-		colorbox[i].addEventListener('click', getBgColor, false);
-	}
-    	
-	
-	$('#brushSize input:radio').addClass('input_hidden');
-	$('#brushSize label').click(function(){
-		$(this).addClass('selected').siblings().removeClass('selected');
-	});
-	
-	canvas.isDrawingMode = true;
-	canvas.freeDrawingBrush.color = brushColor;
-	canvas.freeDrawingBrush.width = brushSize;
-		
-	fabric.Image.fromURL(imageURL, function(oImg){
-			canvas.calcOffset();
-			var yScale = canvas.height/oImg.height;
-			var xScale = canvas.width/oImg.width;
-			oImg.scale(Math.max(yScale,xScale));
-			currentImg = oImg;
-			drawOverlay();
-		});
-	
-	canvas.on('mouse:up', function(options) {
-		n++;
-		//console.log(n);
-		drawOverlay();
-	});
-};
-
-function drawOverlay(){
-	canvas.remove(currentImg);
-	canvas.add(currentImg);
-	canvas.renderAll();
-};
-	
-function OnChange(imageSelection){
-	canvas.clear().renderAll();
-	console.log(imageSelection);
-	imageURL = "images/"+imageSelection+".png";
-	fabric.Image.fromURL(imageURL, function(oImg){
-			canvas.calcOffset();
-			var yScale = canvas.height/oImg.height;
-			var xScale = canvas.width/oImg.width;
-			oImg.scale(Math.max(yScale,xScale));
-			currentImg = oImg;
-			drawOverlay();
-		});
-};
-
-function scaleCanvas(){
-	var canvas = document.getElementById("myCanvas");
-	canvas.width = document.getElementById("canvas_cont").offsetWidth;
-	canvas.height = canvas.width * 0.8;
-};
-
-function updateBrushColor(){
-	canvas.freeDrawingBrush.color = brushColor;
-	console.log(brushColor);
-};
-
-function setBrushSize(size){
-	//console.log(size);
-	if (size=="large"){
-		brushSize = 20;
-	} else if (size=="medium"){
-		brushSize = 10;
-	}else {
-		brushSize = 5;
-	}
-	canvas.freeDrawingBrush.width = brushSize;
-};
-
-
-</script>
+	<!-- Favicon
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<script src="fabric.min.js"></script>
+	<script src="jquery-2.1.4.min.js"></script>
+	<script src="color.js"></script>
 </head>
 <body>
 
@@ -153,7 +39,8 @@ function setBrushSize(size){
 <div class="container">
 	<div class="row" id="header">
 		<div class="ten columns">
-			<h1>Mindfulness Coloring</h1>
+			<h1>Mindfulness Color</h1>
+			<strong>Free online mindfulness coloring pages</strong>
 		</div>
 		<div class="two columns" id="social">
 			<h6>Twitter | Facebook</h6>
@@ -161,28 +48,21 @@ function setBrushSize(size){
 	</div>
 	<div class="row">
 		<div class="two columns">
-			<select name="select" onchange='OnChange(this.value);'>
-				<option value="img1">Pattern</option>
-				<option value="img2">Elephant</option>
-				<option value="img3">Swan</option>
-				<option value="img4">Horse</option>
-				<option value="img5">Zodiac</option>
-				<option value="img6">City</option>
-				<option value="img7">Pattern 2</option>
+			<select id="image-select" name="select" onchange='OnChange(this.value);'>
 			</select>
 			<form name="changeBrush">
 			<div id="brushSize">
 				<input type="radio" name="brushSize" id="smallBrush" onclick="setBrushSize('small')"/>
-				<label for="smallBrush"><img class="brushImg" src="images/brushSmall.png" alt="small" /></label>
+				<label for="smallBrush"><img class="brushImg" src="image/brushSmall.png" alt="small" /></label>
 				<input type="radio" name="brushSize" id="mediumBrush" onclick="setBrushSize('medium')"/>
-				<label for="mediumBrush"><img class="brushImg" src="images/brushMedium.png" alt="medium" /></label>
+				<label for="mediumBrush"><img class="brushImg" src="image/brushMedium.png" alt="medium" /></label>
 				<input type="radio" name="brushSize" id="largeBrush" onclick="setBrushSize('large')"/>
-				<label for="largeBrush"><img class="brushImg" src="images/brushLarge.png" alt="large" /></label>
+				<label for="largeBrush"><img class="brushImg" src="image/brushLarge.png" alt="large" /></label>
 			</div>
 			</form>
 			
 			
-			<div class="colorbox" id="c01"></div>
+			<div class="colorbox selectedColor" id="c01"></div>
 			<div class="colorbox" id="c02"></div>
 			<div class="colorbox" id="c03"></div>
 			<div class="colorbox" id="c04"></div>
@@ -202,16 +82,20 @@ function setBrushSize(size){
 			<div class="colorbox" id="c18"></div>
 			<div class="colorbox" id="c19"></div>
 			<div class="colorbox" id="c20"></div>
-			
+			<div class="colorbox" id="c21"></div>
+			<div class="colorbox" id="c22"></div>
+			<div class="colorbox" id="c23"></div>
+			<div class="colorbox" id="c24"></div>
 	
 		</div>
-		<div class="eight columns" id="canvas_cont">
+		<div class="seven columns" id="canvas_cont">
 		<canvas id="myCanvas"></canvas>
-
+		<span id="artName"></span> <span id="artist"></span><br>
+		<span id="artUrl"></span><br>
+		<span id="artLicence"></span>
 		</div>
-		<div class="two columns" id="ads">
-			<img src="images/book.jpg" width="200px"></img>
-			Buy it on Amazon
+		<div class="three columns" id="ads">
+		<img src="image/ad.png" alt="ad" width="300px" height="600px"></img>
 		</div>
 	</div>
 </div>
