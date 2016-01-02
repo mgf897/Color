@@ -2,6 +2,18 @@ canvas{
 	border: 1px solid grey;
 }
 
+
+#title{
+	font-size: 3em;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	display: block;
+
+}
+
+#header{
+	padding-bottom: 5px;
+}
 .colorbox{
 	width:21%;
 	height:30px;

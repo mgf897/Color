@@ -1,4 +1,4 @@
-var imageURL = 'image/img1.png';
+var imageURL;
 var n = 0;
 var canvas;
 var currentImg;
@@ -6,20 +6,20 @@ var brushColor = "#1abc9c";
 var brushSize = 10;
 var c01;
 
-window.onload = function(){
+var images;
 
-	//select medium brush size
-	
-	//select first color
+window.onload = function(){
 
 	scaleCanvas();
 
 	$.ajax({url:'images.json',success:function(data){ 
+		images = data.images;
+		console.log(images);
 		$.each(data.images, function(i,image){ 
-			console.log(image.url); 
-			console.log(image.title); 
-			 $('#image-select').append( new Option(image.title,image.url) );
-			});	
+			 $('#image-select').append( new Option(image.title,i) );
+			});
+		loadImage(0);
+
 		}, 
 	});
 
@@ -55,14 +55,13 @@ window.onload = function(){
 			canvas.calcOffset();
 			var yScale = canvas.height/oImg.height;
 			var xScale = canvas.width/oImg.width;
-			oImg.scale(Math.max(yScale,xScale));
+			oImg.scale(Math.min(yScale,xScale));
 			currentImg = oImg;
 			drawOverlay();
 		});
 	
 	canvas.on('mouse:up', function(options) {
 		n++;
-		//console.log(n);
 		drawOverlay();
 	});
 };
@@ -73,19 +72,28 @@ function drawOverlay(){
 	canvas.renderAll();
 };
 	
-function OnChange(imageSelection){
+function OnChange(imageIndex){
+	loadImage(imageIndex);
+
+};
+
+function loadImage(imageIndex){
 	canvas.clear().renderAll();
-	console.log(imageSelection);
-	imageURL = imageSelection;
+	imageURL = images[imageIndex].url;
+	$('#artName').html(images[imageIndex].artworkName);
+	$('#artist').html(images[imageIndex].artist);
+	$('#artUrl').html(images[imageIndex].artworkUrl);
+	$('#artLicence').html(images[imageIndex].license);
+
 	fabric.Image.fromURL(imageURL, function(oImg){
 			canvas.calcOffset();
 			var yScale = canvas.height/oImg.height;
 			var xScale = canvas.width/oImg.width;
-			oImg.scale(Math.max(yScale,xScale));
+			oImg.scale(Math.min(yScale,xScale));
 			currentImg = oImg;
 			drawOverlay();
 		});
-};
+}
 
 function scaleCanvas(){
 	var canvas = document.getElementById("myCanvas");
@@ -95,11 +103,10 @@ function scaleCanvas(){
 
 function updateBrushColor(){
 	canvas.freeDrawingBrush.color = brushColor;
-	//console.log(brushColor);
 };
 
 function setBrushSize(size){
-	//console.log(size);
+
 	if (size=="large"){
 		brushSize = 20;
 	} else if (size=="medium"){

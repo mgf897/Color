@@ -39,7 +39,7 @@
 <div class="container">
 	<div class="row" id="header">
 		<div class="ten columns">
-			<h1>Mindfulness Color</h1>
+			<span id="title">Mindfulness Color</span>
 			<strong>Free online mindfulness coloring pages</strong>
 		</div>
 		<div class="two columns" id="social">
@@ -55,7 +55,7 @@
 				<input type="radio" name="brushSize" id="smallBrush" onclick="setBrushSize('small')"/>
 				<label for="smallBrush"><img class="brushImg" src="image/brushSmall.png" alt="small" /></label>
 				<input type="radio" name="brushSize" id="mediumBrush" onclick="setBrushSize('medium')"/>
-				<label for="mediumBrush"><img class="brushImg" src="image/brushMedium.png" alt="medium" /></label>
+				<label for="mediumBrush" class="selected"><img class="brushImg" src="image/brushMedium.png" alt="medium" /></label>
 				<input type="radio" name="brushSize" id="largeBrush" onclick="setBrushSize('large')"/>
 				<label for="largeBrush"><img class="brushImg" src="image/brushLarge.png" alt="large" /></label>
 			</div>
@@ -90,7 +90,7 @@
 		</div>
 		<div class="seven columns" id="canvas_cont">
 		<canvas id="myCanvas"></canvas>
-		<span id="artName"></span> <span id="artist"></span><br>
+		<span id="artName"></span> by <span id="artist"></span><br>
 		<span id="artUrl"></span><br>
 		<span id="artLicence"></span>
 		</div>
