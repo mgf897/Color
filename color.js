@@ -82,7 +82,7 @@ function loadImage(imageIndex){
 	imageURL = images[imageIndex].url;
 	$('#artName').html(images[imageIndex].artworkName);
 	$('#artist').html(images[imageIndex].artist);
-	$('#artUrl').html(images[imageIndex].artworkUrl);
+	$('#artUrl').attr('href',images[imageIndex].artworkUrl);
 	$('#artLicence').html(images[imageIndex].license);
 
 	fabric.Image.fromURL(imageURL, function(oImg){

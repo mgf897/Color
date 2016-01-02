@@ -14,8 +14,23 @@ canvas{
 #header{
 	padding-bottom: 5px;
 }
+
+#palette{
+	overflow: auto;
+	width:100%;
+	padding: 0px;
+	margin: 0px;
+	height: auto;
+}
+#mailList{
+
+}
+.indicates-required{
+	font-size: 0.8em;
+}
+
 .colorbox{
-	width:21%;
+	width:20%;
 	height:30px;
    	background-color:grey;
 	border: 2px solid white;
@@ -113,3 +128,4 @@ select{
 }
 #c24{ background-color:#7f8c8d;
 }
+
