@@ -14,7 +14,7 @@ window.onload = function(){
 
 	$.ajax({url:'images.json',success:function(data){ 
 		images = data.images;
-		console.log(images);
+		//console.log(images);
 		$.each(data.images, function(i,image){ 
 			 $('#image-select').append( new Option(image.title,i) );
 			});
